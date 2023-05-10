@@ -1,5 +1,4 @@
 const Card = (movie) => {
-  // console.log(movie.info);
   const img_path = "https://image.tmdb.org/t/p/w500";
   return (
     <>

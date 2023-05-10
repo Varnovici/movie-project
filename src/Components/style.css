@@ -21,9 +21,10 @@ body {
   height: 100px;
   width: 100%;
   display: flex;
-  justify-content: space-around;
   align-items: center;
   margin-bottom: 30px;
+  justify-content: space-around;
+  flex-direction: row-reverse;
 }
 
 nav ul {

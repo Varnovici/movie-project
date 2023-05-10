@@ -4,7 +4,7 @@ import Card from "./Card";
 import Modal from "react-modal";
 import Login from "./Login";
 
-const API_KEY = "&api_key=7a10079190d8c5eeec347c39d17bf78a";
+const API_KEY ="&api_key=7a10079190d8c5eeec347c39d17bf78a";
 const base_url = "https://api.themoviedb.org/3";
 
 function getMoviesByPage(pageNumber) {
@@ -16,7 +16,7 @@ function getMoviesByPage(pageNumber) {
     pageNumber.current;
   return url;
 }
-let arr = ["Popular", "Theatre", "Kids", "Drama", "Comedy"];
+let arr = ["Popular", "Cinema", "Kids", "Drama", "Comedy"];
 
 const customStyles = {
   content: {
@@ -53,20 +53,16 @@ const customStyles = {
 const Main = () => {
   const [movieData, setData] = useState([]);
   const [movieFilteredData, setFilteredData] = useState([]);
-  // const [pageNumber, setPageNumber] = useState(1);
   const pageNumber = useRef(1);
   const [search, setSearch] = useState("");
   const [chooseCateg, setChooseCateg] = useState("Popular");
   const [newUrl, setNewUrl] = useState("");
   const [activeSearch, setActiveSearch] = useState(false);
-  let subtitle;
-  const [modalIsOpen, setIsOpen] = useState(false);
+const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
     setIsOpen(true);
   }
-
-
 
   function closeModal() {
     setIsOpen(false);
@@ -96,7 +92,7 @@ const Main = () => {
   }, [pageNumber.current]);
   const getData = (movieType, pageNumber) => {
     switch (movieType) {
-      case "Theatre":
+      case "Cinema":
         setNewUrl(
           base_url +
             "/discover/movie?primary_release_date.gte=2014-09-15&primary_release_date.lte=2014-10-22" +
@@ -147,7 +143,7 @@ const Main = () => {
   useEffect(() => {
     const url =
       base_url +
-      "/search/movie?api_key=7a10079190d8c5eeec347c39d17bf78a&query=" +
+      "/search/movie?"+ API_KEY + "&query=" +
       search;
     fetch(url)
       .then((res) => res.json())
@@ -205,7 +201,6 @@ const Main = () => {
                 setSearch(e.target.value);
               }}
               value={search}
-              // onKeyDown={searchMovie}
             ></input>
             <button>
               <ReactSVG src="search.svg" />{" "}
@@ -214,6 +209,7 @@ const Main = () => {
         </form>
         <div>
         <button className="Login" onClick={openModal}>Log In</button>
+     
         </div>
       </div>
       <div className="container">
@@ -247,9 +243,8 @@ const Main = () => {
           style={customStyles}
           contentLabel="Example Modal"
         >
-         
-          <button className="modal-close" onClick={closeModal}>close</button>
-          
+       
+          <button className="modal-close" onClick={closeModal}>close</button>  
         <Login />
         </Modal>
       </div>
